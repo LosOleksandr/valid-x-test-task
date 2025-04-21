@@ -3,6 +3,8 @@ import { prisma } from '@/lib/prisma';
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
+  console.log(id);
+
   if (!id) {
     return new Response(JSON.stringify({ error: 'Missing post ID' }), {
       status: 400,
@@ -12,7 +14,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
 
   try {
     const data = await prisma.post.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
       include: {
         author: {
           select: { name: true },

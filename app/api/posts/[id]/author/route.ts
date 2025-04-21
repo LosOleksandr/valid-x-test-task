@@ -3,11 +3,9 @@ import { prisma } from '@/lib/prisma';
 export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
-  const numericId = parseInt(id);
-
   try {
     const post = await prisma.post.findUnique({
-      where: { id: numericId },
+      where: { id },
       select: { authorId: true },
     });
 
@@ -21,7 +19,7 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
     const similarPosts = await prisma.post.findMany({
       where: {
         authorId: post.authorId,
-        id: { not: numericId },
+        id: { not: id },
         published: true,
       },
       include: {
