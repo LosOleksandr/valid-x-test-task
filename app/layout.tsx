@@ -1,3 +1,4 @@
+import Header from '@/components/header';
 import type { Metadata } from 'next';
 import { Lexend, Roboto_Mono } from 'next/font/google';
 import './globals.css';
@@ -31,7 +32,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lexend.variable} ${robotoMono.variable} antialiased`}>{children}</body>
+      <body className={`${lexend.variable} ${robotoMono.variable} antialiased`}>
+        <Header />
+        <main className="min-h-[calc(100dvh-61px)]">{children}</main>
+      </body>
     </html>
   );
 }

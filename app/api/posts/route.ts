@@ -2,7 +2,10 @@ import { prisma } from '@/lib/prisma';
 
 export async function GET() {
   try {
-    const data = await prisma.user.findMany();
+    const data = await prisma.post.findMany({
+      where: { published: true },
+      include: { author: { select: { name: true } } },
+    });
 
     return new Response(JSON.stringify(data), {
       status: 200,
