@@ -1,7 +1,8 @@
-import { Post } from '@prisma/client';
+import { Post } from '@/types/post';
+import { cache } from 'react';
 import api from '.';
 
-const getPosts = async (): Promise<Post[]> => {
+const getPosts = cache(async (): Promise<Post[]> => {
   try {
     const res = await api.get<Post[]>('/posts');
     return res.data;
@@ -9,6 +10,6 @@ const getPosts = async (): Promise<Post[]> => {
     console.log(error);
     return [];
   }
-};
+});
 
 export { getPosts };
