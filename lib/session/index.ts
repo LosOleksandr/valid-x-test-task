@@ -1,3 +1,4 @@
+import { Role } from '@prisma/client';
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import { cache } from 'react';
@@ -7,7 +8,7 @@ const secretKey = process.env.SECRET_KEY;
 
 const encodedKey = new TextEncoder().encode(secretKey);
 
-export async function encrypt(payload: { id: string; expiresAt: Date }) {
+export async function encrypt(payload: { id: string; role: Role; expiresAt: Date }) {
   return new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
@@ -27,9 +28,9 @@ export async function decrypt(session: string | undefined = '') {
   }
 }
 
-export async function createSession(id: string) {
+export async function createSession(id: string, role: Role) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-  const session = await encrypt({ id, expiresAt });
+  const session = await encrypt({ id, role, expiresAt });
   const cookieStore = await cookies();
 
   cookieStore.set('session', session, {
@@ -49,8 +50,9 @@ export const verifySession = cache(async () => {
     return {
       isAuth: false,
       id: null,
+      role: null,
     };
   }
 
-  return { isAuth: true, id: session.id };
+  return { isAuth: true, id: session.id, role: session.role };
 });

@@ -11,6 +11,7 @@ const Button: FC<ButtonProps> = ({
   isLoading = false,
   children,
   className = '',
+  type = 'button',
   ...props
 }) => {
   const baseStyles =
@@ -23,6 +24,7 @@ const Button: FC<ButtonProps> = ({
 
   return (
     <button
+      type={type}
       className={`${baseStyles} ${variants[variant]} ${className}`}
       disabled={isLoading || props.disabled}
       {...props}

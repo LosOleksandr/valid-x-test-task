@@ -78,7 +78,7 @@ export const signup = async (state: SignupFormState, formData: FormData) => {
     };
   }
 
-  await createSession(createdUser.id);
+  await createSession(createdUser.id, createdUser.role);
 
   redirect('/');
 };
@@ -117,7 +117,7 @@ export const login = async (state: LoginFormState, formData: FormData) => {
     };
   }
 
-  await createSession(user.id);
+  await createSession(user.id, user.role);
 
   redirect('/');
 };

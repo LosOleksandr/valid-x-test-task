@@ -6,6 +6,7 @@ const prisma = new PrismaClient();
 const adminData: Omit<Prisma.UserCreateInput, 'password'> = {
   name: 'Charlie',
   email: 'charlie@prisma.io',
+  role: 'ADMIN',
   posts: {
     create: [
       {
