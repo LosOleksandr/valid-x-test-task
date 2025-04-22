@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 
 export const revalidate = 3600;
 
-export default async function Dashboard() {
+const Dashboard = () => {
   return (
     <div className="relative m-auto flex max-w-6xl flex-col p-4 font-mono">
       <div className="flex items-center gap-4">
@@ -19,4 +19,6 @@ export default async function Dashboard() {
       </Suspense>
     </div>
   );
-}
+};
+
+export default Dashboard;

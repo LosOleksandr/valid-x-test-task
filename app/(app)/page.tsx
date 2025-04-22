@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 
 export const revalidate = 3600;
 
-export default async function Home() {
+const Home = () => {
   return (
     <div className="relative m-auto flex max-w-6xl flex-col p-4 font-mono">
       <h1 className="text-3xl font-bold">Latest Blogs</h1>
@@ -12,4 +12,6 @@ export default async function Home() {
       </Suspense>
     </div>
   );
-}
+};
+
+export default Home;

@@ -3,12 +3,9 @@ import { prisma } from '@/lib/prisma';
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
-  console.log(id);
-
   if (!id) {
     return new Response(JSON.stringify({ error: 'Missing post ID' }), {
       status: 400,
-      headers: { 'Content-Type': 'application/json' },
     });
   }
 
