@@ -1,22 +1,24 @@
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { verifySession } from './lib/session';
 
 export async function middleware(request: NextRequest) {
-  const { isAuth } = await verifySession();
+  const { isAuth, role } = await verifySession();
+
   const { pathname } = request.nextUrl;
 
   const isAuthPage = pathname === '/login' || pathname === '/signup';
-  const isProtected = pathname.startsWith('/dashboard');
+  const isAdminRoute = pathname.startsWith('/dashboard');
 
   if (isAuth && isAuthPage) {
-    const dashboardUrl = new URL('/', request.url);
-    return NextResponse.redirect(dashboardUrl);
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
-  if (!isAuth && isProtected) {
-    const loginUrl = new URL('/login', request.url);
-    return NextResponse.redirect(loginUrl);
+  if (!isAuth && isAdminRoute) {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+
+  if (isAuth && isAdminRoute && role !== 'ADMIN') {
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   return NextResponse.next();
