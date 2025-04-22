@@ -3,8 +3,8 @@
 import { signup } from '@/app/actions/auth';
 import Link from 'next/link';
 import { useActionState } from 'react';
-import Button from './shared/button';
-import Input from './shared/input';
+import Button from '../shared/button';
+import Input from '../shared/input';
 
 export function SignupForm() {
   const [state, action, pending] = useActionState(signup, undefined);

@@ -7,7 +7,13 @@ type SimiliarPostsProps = {
 };
 
 const SimiliarPosts: FC<SimiliarPostsProps> = async ({ postId }) => {
-  const posts = await getPostsByAuthor(postId);
+  const { posts, error } = await getPostsByAuthor(postId);
+
+  if (error) {
+    return (
+      <div className="p-4 text-center font-semibold text-red-600">Error loading posts: {error}</div>
+    );
+  }
 
   return Boolean(posts) ? (
     <section className="flex w-full max-w-4xl flex-col items-start">

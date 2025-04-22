@@ -1,8 +1,8 @@
-import CreatePostForm from '@/components/create-post-form';
+import CreatePostForm from '@/components/forms/create-post-form';
 
 const NewPost = () => {
   return (
-    <div>
+    <div className="px-4 py-10">
       <CreatePostForm />
     </div>
   );

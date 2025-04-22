@@ -1,22 +1,11 @@
 'use server';
 
 import { prisma } from '@/lib/prisma';
+import { LoginSchema, SignupFormSchema } from '@/lib/schemas/auth';
 import { createSession } from '@/lib/session';
 import { compare, hash } from 'bcrypt';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { z } from 'zod';
-
-const SignupFormSchema = z.object({
-  name: z.string().min(2, { message: 'Name must be at least 2 characters long.' }).trim(),
-  email: z.string().email({ message: 'Please enter a valid email.' }).trim(),
-  password: z.string().min(8, { message: 'Be at least 8 characters long' }).trim(),
-});
-
-const LoginSchema = z.object({
-  email: z.string().email({ message: 'Please enter a valid email.' }).trim(),
-  password: z.string().min(1, { message: 'Password is required' }).trim(),
-});
 
 export type SignupFormState =
   | {
@@ -80,7 +69,7 @@ export const signup = async (state: SignupFormState, formData: FormData) => {
 
   await createSession(createdUser.id, createdUser.role);
 
-  redirect('/');
+  return createdUser.role === 'ADMIN' ? redirect('/dashboard') : redirect('/');
 };
 
 export const login = async (state: LoginFormState, formData: FormData) => {
@@ -119,7 +108,7 @@ export const login = async (state: LoginFormState, formData: FormData) => {
 
   await createSession(user.id, user.role);
 
-  redirect('/');
+  return user.role === 'ADMIN' ? redirect('/dashboard') : redirect('/');
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
