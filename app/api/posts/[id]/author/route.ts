@@ -12,7 +12,6 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
     if (!post) {
       return new Response(JSON.stringify({ error: 'Post not found' }), {
         status: 404,
-        headers: { 'Content-Type': 'application/json' },
       });
     }
 
@@ -30,7 +29,6 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
 
     return new Response(JSON.stringify(similarPosts), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
     return new Response(
@@ -40,7 +38,6 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
       }),
       {
         status: 500,
-        headers: { 'Content-Type': 'application/json' },
       },
     );
   }
