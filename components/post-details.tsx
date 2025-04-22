@@ -16,7 +16,7 @@ const PostDetails: FC<PostDetailsProps> = ({ post }) => {
   });
 
   return (
-    <article className="m-auto mx-auto max-w-4xl space-y-6 rounded-xl border p-6 shadow-sm">
+    <article className="m-auto mx-auto min-h-[240px] w-full max-w-4xl space-y-6 rounded-xl border p-6 shadow-sm">
       <h1 className="text-3xl font-bold">{title}</h1>
 
       <div className="flex items-center gap-4 text-sm text-slate-600">

@@ -18,7 +18,7 @@ const PostListItem: FC<PostListItemProps> = ({ post }) => {
 
   return (
     <Link href={`/posts/${id}`}>
-      <div className="group relative grid cursor-pointer grid-rows-[auto_auto_1fr] overflow-hidden rounded-xl border p-4">
+      <div className="group relative grid min-h-[360px] cursor-pointer grid-rows-[56px_auto_1fr] overflow-hidden rounded-xl border p-4">
         <h2 className="line-clamp-2 text-xl font-semibold">{title}</h2>
 
         <div className="my-4 flex items-center gap-4 text-slate-600">

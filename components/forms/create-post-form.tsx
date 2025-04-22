@@ -3,9 +3,9 @@
 import { postSchema } from '@/lib/schemas/post';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import MarkdownEditor from './markdown-editor';
-import Button from './shared/button';
-import Input from './shared/input';
+import MarkdownEditor from '../markdown-editor';
+import Button from '../shared/button';
+import Input from '../shared/input';
 
 const CreatePostForm = () => {
   const [title, setTitle] = useState('');
@@ -51,7 +51,7 @@ const CreatePostForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="m-auto mt-10 flex max-w-2xl flex-col gap-4 rounded-xl border-2 px-6 py-12 pt-8 shadow-2xl"
+      className="m-auto flex max-w-2xl flex-col gap-4 rounded-xl border-2 px-6 py-12 pt-8 shadow-2xl"
     >
       <h1 className="text-center text-3xl font-bold">Create new post</h1>
       <Input
